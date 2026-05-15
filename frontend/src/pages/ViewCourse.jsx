@@ -167,7 +167,7 @@ function ViewCourse() {
 
                         <ul className='text-sm text-gray-700 space-y-1 pt-2'>
                             <li>✅ 10+ hours of video content</li>
-                            <li>✅ Lifetime access to course materials</li>
+                            <li>✅ Lifetime access to course Materials</li>
                         </ul>
                         {!isEnrolled ?<button className='bg-[black] text-white px-6 py-2 rounded hover:bg-gray-700 mt-3 cursor-pointer' onClick={()=>handleEnroll(userData._id,courseId)}>Enroll Now</button> : <button className='bg-green-100 text-green-500 px-6 py-2 rounded hover:bg-gray-700 mt-3 cursor-pointer' onClick={()=>navigate(`/viewlecture/${courseId}`)}>Watch Now</button>}
                          <button className='bg-[black] text-white px-6 py-2 rounded hover:bg-gray-700 mt-3 cursor-pointer' onClick={()=>navigate(`/viewassignment/${courseId}`)}>Assignment</button>
