@@ -19,6 +19,7 @@ export const createReview = async (req,res) => {
         const review = new Review({
             course:courseId,
             user:userId,
+            rating,
             comment
         })
         await review.save()
