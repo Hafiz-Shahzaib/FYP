@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
+import logo from '../../assets/logo (1).svg'
 import { assets } from './../../assets/assets';
 import Message from './Message'
 import { toast } from 'react-toastify'
@@ -104,8 +105,8 @@ useEffect(() => {
       <div ref={containerRef} className='flex-1 overflow-y-auto pr-2 min-h-0'>
         {messages.length === 0 && (
           <div className='h-full flex flex-col items-center justify-center gap-2 text-primary'>
-            <img src={assets.logo_full_dark} alt="" className='w-full max-w-56 sm:max-w-68'/>
-            {/* <img src={logo} alt="" className='w-full max-w-50 sm:max-w-68'/> */}
+            {/* <img src={assets.logo_full_dark} alt="" className='w-full max-w-56 sm:max-w-68'/> */}
+            <img src={logo} alt="" className='w-full max-w-50 sm:max-w-18'/>
             <p className='mt-1 text-4xl sm:text-6xl text-center text-black font-semibold'>
               Ask me anything.
             </p>

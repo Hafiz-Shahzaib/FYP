@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import logo from '../assets/logo.jpg'
+// import logo from '../assets/logo.jpg'
+import logo from '../assets/logo.svg'
 // import favicon from '../assets/favicon.svg'
 import { IoPersonCircle } from "react-icons/io5";
 import { useDispatch, useSelector } from 'react-redux';
@@ -51,7 +52,7 @@ function Nav() {
     <div>
       <div className='w-[100%] h-[70px] fixed top-0 px-[20px] py-[10px] flex items-center justify-between bg-[#00000047] z-10'>
         <div className='lg:w-[20%] w-[40%] lg:pl-[50px] flex items-center gap-3'>
-            <img src={logo} alt="" className='w-[60px] rounded-[5px] border-2 border-white'/>
+            <img src={logo} alt="" className='w-[60px] rounded-[5px]'/>
             {/* <img src={favicon} alt="" className='w-[60px] rounded-[5px] object-cover shrink-0'/>
             <p className='text-blue-500 font-bold leading-tight m-0 text-[25px]'>Revolutionizing <br /> Digital Learning</p> */}
         </div>

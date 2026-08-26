@@ -2,7 +2,7 @@ import React ,{ useEffect, useState  } from 'react'
 import Nav from '../../component/Nav';
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useNavigate, Outlet } from 'react-router-dom';
-// import logo from '../../assets/logo.jpg'
+import logo from '../../assets/logo.svg'
 import { assets } from '../../assets/assets';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -174,13 +174,14 @@ setToken(null)
   <div className="flex-shrink-0">
 
     {/* Logo */}
-    <img src={assets.logo_full} alt="" className='w-full max-w-48'/>
+    <img src={logo} alt="" className='w-100% flex px-[30%] h-[50px] max-w-48'/>
+    {/* <img src={assets.logo_full} alt="" className='w-full max-w-48'/> */}
     {/* <img src={logo} alt="" className='w-100% h-[50px] max-w-48'/> */}
 
     {/* New Chat */}
     <button
       onClick={createNewChat}
-      className='flex justify-center items-center w-full py-2 mt-8 text-white bg-gradient-to-r from-[#A456F7] to-[#3D81F6] text-sm rounded-md'
+      className='flex justify-center items-center w-full py-2 mt-8 text-black bg-white hover:bg-gray-600 text-sm rounded-md'
     >
       <span className='mr-2 text-xl'>+</span>
       New Chat
@@ -269,7 +270,8 @@ setToken(null)
     </div>
 
     {/* Dark Mode */}
-    <div className='flex items-center justify-between p-3 mt-4 border border-gray-300 rounded-md'>
+    
+    {/* <div className='flex items-center justify-between p-3 mt-4 border border-gray-300 rounded-md'>
       <div className='flex items-center gap-2 text-white text-sm'>
         <img src={assets.theme_icon} className='w-4' alt="" />
         <p>Dark Mode</p>
@@ -287,7 +289,7 @@ setToken(null)
         <div className='w-9 h-5 bg-gray-400 rounded-full peer-checked:bg-purple-600'></div>
         <span className='absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform peer-checked:translate-x-4'></span>
       </label>
-    </div>
+    </div> */}
 
     {/* User */}
     <div className='flex items-center gap-3 p-3 mt-4 border border-gray-300 rounded-md cursor-pointer group'>

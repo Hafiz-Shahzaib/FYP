@@ -10,9 +10,9 @@ export const textMessageController = async (req, res) => {
     const userId = req.userId
     const { chatId, prompt } = req.body
 
-    console.log("REQ BODY:", req.body);
+    // console.log("REQ BODY:", req.body);
 
-    // ✅ Validate input
+    //  Validate input
     if (!chatId || !prompt) {
       return res.status(400).json({
         success: false,
@@ -22,7 +22,7 @@ export const textMessageController = async (req, res) => {
 
     const chat = await Chat.findOne({ userId, _id: chatId })
 
-    // ✅ Check chat exists
+    //  Check chat exists
     if (!chat) {
       return res.status(404).json({
         success: false,
