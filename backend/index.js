@@ -28,7 +28,7 @@ app.use(cors({
   credentials: true,
 }))
 
-// connectDb()
+ connectDb()
 
 
 
