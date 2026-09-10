@@ -128,7 +128,7 @@ if (typeof videoUrl !== "string") {
         value={lectureContent}        
         onChange={setLectureContent}   
         modules={modules}             
-        className="bg-white w-full p-3 border rounded-md"
+        className="bg-white w-full p-3 border rounded-md hg-auto"
         placeholder="Write your lecture content here..."
     />
 </div> 
