@@ -17,7 +17,9 @@ import messageRouter from "./route/messageRoute.js";
 // for admin
 // import adminRoutes from "./routes/adminRoutes.js";
 
-const port = process.env.PORT;
+// -------now----
+
+//const port = process.env.PORT;
 const app = express();
 app.use(express.json())
 app.use(cookieParser())
@@ -25,6 +27,8 @@ app.use(cors({
   origin: "http://localhost:5173",
   credentials: true,
 }))
+
+// connectDb()
 
 
 
@@ -47,7 +51,9 @@ app.get("/", (req, res) => {
   res.send("Hello from Server");
 });
 
-app.listen(port, () => {
-  console.log("Server Started");
-  connectDb();
-});
+// app.listen(port, () => {
+//   console.log("Server Started");
+//   connectDb();
+// });
+
+export default app;
