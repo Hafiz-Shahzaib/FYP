@@ -25,7 +25,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
   // origin: "http://localhost:5173",
-  origin: "https://fyp-o9zs.vercel.app/",
+  origin: "https://fyp-vz3h.vercel.app/",
   credentials: true,
 }))
 
