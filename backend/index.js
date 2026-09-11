@@ -24,12 +24,11 @@ const app = express();
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-  // origin: "http://localhost:5173",
-  origin: "https://fyp-vz3h.vercel.app/",
+  origin: "http://localhost:5173",
   credentials: true,
 }))
 
- connectDb()
+ // connectDb()
 
 
 
@@ -52,9 +51,9 @@ app.get("/", (req, res) => {
   res.send("Hello from Server");
 });
 
-// app.listen(port, () => {
-//   console.log("Server Started");
-//   connectDb();
-// });
+app.listen(port, () => {
+  console.log("Server Started");
+  connectDb();
+});
 
-export default app;
+// export default app;
