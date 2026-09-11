@@ -19,7 +19,7 @@ import messageRouter from "./route/messageRoute.js";
 
 // -------now----
 
-//const port = process.env.PORT;
+const port = process.env.PORT;
 const app = express();
 app.use(express.json())
 app.use(cookieParser())
