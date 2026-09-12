@@ -83,7 +83,7 @@ function SignUp() {
             <div className='flex md:w-[50%] w-[70%] items-center justify-between'>
               <span className={`px-[10px] py-[5px] border-[2px] border-[#e7e6e6] rounded-xl cursor-pointer hover:border-black ${role === "student" ? "border-black" : "border-[#646464]"}`} onClick={()=>setRole("student")}>Student</span>
               <span className={`px-[10px] py-[5px] border-[2px] border-[#e7e6e6] rounded-xl cursor-pointer hover:border-black ${role === "educator" ? "border-black" : "border-[#646464]"}`} onClick={()=>setRole("educator")}>Educator</span>
-              <span className={`px-[10px] py-[5px] border-[2px] border-[#e7e6e6] rounded-xl cursor-pointer hover:border-black ${role === "educator" ? "border-black" : "border-[#646464]"}`} onClick={()=>setRole("admin")}>Admin</span>
+              {/* <span className={`px-[10px] py-[5px] border-[2px] border-[#e7e6e6] rounded-xl cursor-pointer hover:border-black ${role === "admin" ? "border-black" : "border-[#646464]"}`} onClick={()=>setRole("admin")}>Admin</span> */}
             </div>
             <button className='w-[80%] h-[40px] bg-black text-white cursor-pointer flex items-center justify-center rounded-[5px]' onClick={handleSignup} disabled={loading}>{loading ? <ClipLoader size={30} color='white'/>:"SignUp"}</button>
             <div className='w-[80%] flex items-center gap-2'>
