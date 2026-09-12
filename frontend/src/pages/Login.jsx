@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import logo from '../assets/logo.jpg'
+import logo from '../assets/logo.svg'
 import google from '../assets/google.jpg'
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEye } from "react-icons/io5";
@@ -96,7 +96,7 @@ function Login() {
   
           {/* right div */}
           <div className='w-[50%] h-[100%] rounded-r-2xl bg-[black] md:flex items-center justify-center flex-col hidden'>
-              <img src={logo} alt="logo" className='w-30 shadow-2xl ' />
+              <img src={logo} alt="logo" className='w-30 shadow-2xl mb-3.5' />
               <span className='text-2xl text-white'>REVOLUTIONIZING <br /> DIGITAL LEARNING</span>
   
           </div>
