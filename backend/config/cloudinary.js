@@ -61,7 +61,16 @@ const uploadOnCloudinary = (fileBuffer) => {
             (error, result) => {
 
                 if (error) {
-                    console.log("CLOUDINARY ERROR:", error);
+                    // console.log("CLOUDINARY ERROR:", error);
+
+                    // for vercel
+
+                    console.error("CLOUDINARY UPLOAD ERROR:");
+    console.error("Error:", error);
+    console.error("Message:", error.message);
+    console.error("HTTP Code:", error.http_code);
+
+
                     return reject(error);
                 }
 
