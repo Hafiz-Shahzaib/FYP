@@ -3,8 +3,8 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 import Login from './pages/Login'
-export const serverUrl = "http://localhost:8000"
-// export const serverUrl = "https://fyp-six-orpin.vercel.app"
+// export const serverUrl = "http://localhost:8000"
+export const serverUrl = "https://fyp-six-orpin.vercel.app"
 import {ToastContainer} from "react-toastify"
 import getCurrentUser from './customHooks/getCurrentUser'
 import { useSelector } from 'react-redux'
