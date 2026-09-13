@@ -110,7 +110,11 @@ export const editCourse = async (req,res) => {
         const {title, subTitle, description, semester, courseCode, subject, isPublished} = req.body
         let thumbnail
         if(req.file){
-            thumbnail = await uploadOnCloudinary(req.file.path)
+            // thumbnail = await uploadOnCloudinary(req.file.path)
+
+            // for vercel
+
+            thumbnail = await uploadOnCloudinary(req.file.buffer)
         }
         let course = await Course.findById(courseId)
         if(!course){

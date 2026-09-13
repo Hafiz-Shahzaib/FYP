@@ -16,12 +16,15 @@ export const getCurrentUser = async (req,res) => {
 
 export const updateProfile = async (req,res) => {
     try {
-         console.log("req.file:", req.file);
         const userId = req.userId
         const {description, name} = req.body
         let photoUrl
         if(req.file){
-            photoUrl = await uploadOnCloudinary(req.file.path)
+            // photoUrl = await uploadOnCloudinary(req.file.path)
+
+            // for vercel
+
+            photoUrl = await uploadOnCloudinary(req.file.buffer)
         }
         const user = await User.findByIdAndUpdate(userId, {name, description, photoUrl}) 
 
