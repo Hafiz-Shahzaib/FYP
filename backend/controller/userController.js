@@ -50,11 +50,25 @@ export const getCurrentUser = async (req,res) => {
 
 
 
+
+
 // for vercel
 
 
 export const updateProfile = async (req, res) => {
     try {
+        console.log("========== UPDATE PROFILE START ==========");
+
+        console.log("User ID:", req.userId);
+        console.log("File exists:", !!req.file);
+
+        if (req.file) {
+            console.log("File name:", req.file.originalname);
+            console.log("File type:", req.file.mimetype);
+            console.log("Buffer exists:", !!req.file.buffer);
+            console.log("Buffer size:", req.file.buffer?.length);
+        }
+
         const userId = req.userId;
         const { description, name } = req.body;
 
@@ -63,29 +77,27 @@ export const updateProfile = async (req, res) => {
             description
         };
 
-        // If a new image is uploaded
+        // Upload image only if user selected one
         if (req.file) {
 
-            console.log("FILE RECEIVED:", req.file.originalname);
-            console.log("BUFFER EXISTS:", !!req.file.buffer);
-            console.log("BUFFER SIZE:", req.file.buffer?.length);
+            console.log("Starting Cloudinary upload...");
 
             const uploadedPhotoUrl = await uploadOnCloudinary(
                 req.file.buffer
             );
 
-            console.log("CLOUDINARY URL:", uploadedPhotoUrl);
+            console.log("Cloudinary URL:", uploadedPhotoUrl);
 
             if (!uploadedPhotoUrl) {
                 return res.status(500).json({
-                    message: "Image upload failed"
+                    message: "Cloudinary image upload failed"
                 });
             }
 
             updateData.photoUrl = uploadedPhotoUrl;
         }
 
-        console.log("UPDATE DATA:", updateData);
+        console.log("Update data:", updateData);
 
         const updatedUser = await User.findByIdAndUpdate(
             userId,
@@ -99,8 +111,8 @@ export const updateProfile = async (req, res) => {
             });
         }
 
-        console.log("PROFILE UPDATED SUCCESSFULLY");
-        console.log("PHOTO URL:", updatedUser.photoUrl);
+        console.log("Profile updated successfully");
+        console.log("Photo URL:", updatedUser.photoUrl);
 
         return res.status(200).json(updatedUser);
 
@@ -110,12 +122,12 @@ export const updateProfile = async (req, res) => {
         console.error("ERROR:", error);
         console.error("ERROR MESSAGE:", error?.message);
         console.error("ERROR NAME:", error?.name);
-        console.error("ERROR CODE:", error?.code);
         console.error("ERROR HTTP CODE:", error?.http_code);
+        console.error("ERROR JSON:", JSON.stringify(error));
 
         return res.status(500).json({
             message: "Profile update failed",
-            error: error?.message || "Unknown error"
+            error: error?.message || JSON.stringify(error)
         });
     }
 };
