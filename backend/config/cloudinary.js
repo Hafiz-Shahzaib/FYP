@@ -78,6 +78,23 @@ const uploadOnCloudinary = (fileBuffer) => {
                 console.log(result.secure_url);
 
                 resolve(result.secure_url);
+
+                // now
+
+                console.log(
+    "Cloudinary name exists:",
+    !!process.env.CLOUDINARY_NAME
+);
+
+console.log(
+    "Cloudinary API key exists:",
+    !!process.env.CLOUDINARY_API_KEY
+);
+
+console.log(
+    "Cloudinary API secret exists:",
+    !!process.env.CLOUDINARY_API_SECRET
+);
             }
         );
 
