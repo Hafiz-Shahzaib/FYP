@@ -104,129 +104,30 @@ export const getCreatorCourses = async (req,res) => {
     }
 }
 
-// export const editCourse = async (req,res) => {
-//     try {
-//         const {courseId} = req.params
-//         const {title, subTitle, description, semester, courseCode, subject, isPublished} = req.body
-//         let thumbnail
-//         if(req.file){
-//             // thumbnail = await uploadOnCloudinary(req.file.path)
-
-//             // for vercel
-
-//             thumbnail = await uploadOnCloudinary(req.file.buffer)
-//         }
-//         let course = await Course.findById(courseId)
-//         if(!course){
-//             return res.status(400).json({message:"Course is not found"})
-//         }
-//         const updateData = {title, subTitle, description, semester, courseCode, isPublished, subject, thumbnail}
-
-//         course = await Course.findByIdAndUpdate(courseId, updateData, {new:true})
-//         return res.status(200).json(course)
-//     } catch (error) {
-//         return res.status(500).json({message:`failed to edit Course ${error}`})
-//     }
-// }
-
-
-// for vercel
-
-export const editCourse = async (req, res) => {
+export const editCourse = async (req,res) => {
     try {
+        const {courseId} = req.params
+        const {title, subTitle, description, semester, courseCode, subject, isPublished} = req.body
+        let thumbnail
+        if(req.file){
+            // thumbnail = await uploadOnCloudinary(req.file.path)
 
-        console.log("========== EDIT COURSE START ==========");
+            // for vercel
 
-        const { courseId } = req.params;
-
-        const {
-            title,
-            subTitle,
-            description,
-            semester,
-            courseCode,
-            subject,
-            isPublished
-        } = req.body;
-
-        console.log("Course ID:", courseId);
-        console.log("File exists:", !!req.file);
-
-        if (req.file) {
-            console.log("File name:", req.file.originalname);
-            console.log("File type:", req.file.mimetype);
-            console.log("Buffer exists:", !!req.file.buffer);
-            console.log("Buffer size:", req.file.buffer?.length);
+            thumbnail = await uploadOnCloudinary(req.file.buffer)
         }
-
-        const course = await Course.findById(courseId);
-
-        if (!course) {
-            return res.status(404).json({
-                message: "Course is not found"
-            });
+        let course = await Course.findById(courseId)
+        if(!course){
+            return res.status(400).json({message:"Course is not found"})
         }
+        const updateData = {title, subTitle, description, semester, courseCode, isPublished, subject, thumbnail}
 
-        const updateData = {
-            title,
-            subTitle,
-            description,
-            semester,
-            courseCode,
-            subject,
-            isPublished
-        };
-
-        // Upload new thumbnail only when selected
-        if (req.file) {
-
-            console.log("Starting Cloudinary thumbnail upload...");
-
-            const uploadedThumbnail = await uploadOnCloudinary(
-                req.file.buffer
-            );
-
-            console.log(
-                "Cloudinary thumbnail URL:",
-                uploadedThumbnail
-            );
-
-            if (!uploadedThumbnail) {
-                return res.status(500).json({
-                    message: "Cloudinary thumbnail upload failed"
-                });
-            }
-
-            updateData.thumbnail = uploadedThumbnail;
-        }
-
-        console.log("Course update data:", updateData);
-
-        const updatedCourse = await Course.findByIdAndUpdate(
-            courseId,
-            updateData,
-            { new: true }
-        );
-
-        console.log("Course updated successfully");
-
-        return res.status(200).json(updatedCourse);
-
+        course = await Course.findByIdAndUpdate(courseId, updateData, {new:true})
+        return res.status(200).json(course)
     } catch (error) {
-
-        console.error("========== EDIT COURSE ERROR ==========");
-        console.error("ERROR:", error);
-        console.error("ERROR MESSAGE:", error?.message);
-        console.error("ERROR NAME:", error?.name);
-        console.error("ERROR HTTP CODE:", error?.http_code);
-        console.error("ERROR JSON:", JSON.stringify(error));
-
-        return res.status(500).json({
-            message: "Failed to edit course",
-            error: error?.message || JSON.stringify(error)
-        });
+        return res.status(500).json({message:`failed to edit Course ${error}`})
     }
-};
+}
 
 
 export const getCourseById = async (req,res) => {
