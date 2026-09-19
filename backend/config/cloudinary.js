@@ -1,34 +1,34 @@
-// import { v2 as cloudinary } from 'cloudinary'
+import { v2 as cloudinary } from 'cloudinary'
 
-// import fs from "fs"
+import fs from "fs"
 
 
-// const uploadOnCloudinary = async (filePath) => {
-//     cloudinary.config({ 
-//   cloud_name: process.env.CLOUDINARY_NAME, 
-//   api_key: process.env.CLOUDINARY_API_KEY, 
-//   api_secret: process.env.CLOUDINARY_API_SECRET
-// });
+const uploadOnCloudinary = async (filePath) => {
+    cloudinary.config({ 
+  cloud_name: process.env.CLOUDINARY_NAME, 
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
-// try {
-//     if(!filePath){
-//         return null
-//     }
-//     const uploadResult = await cloudinary.uploader.upload(filePath,{resource_type:'auto'})
-//     fs.unlinkSync(filePath)
-//     return uploadResult.secure_url
+try {
+    if(!filePath){
+        return null
+    }
+    const uploadResult = await cloudinary.uploader.upload(filePath,{resource_type:'auto'})
+    fs.unlinkSync(filePath)
+    return uploadResult.secure_url
 
-//     console.log("CLOUDINARY UPLOAD RESULT:", uploadResult)
-//     console.log("CLOUDINARY Name:", CLOUDINARY_NAME)
-//     console.log("CLOUDINARY API Key:", CLOUDINARY_API_KEY)
+    // console.log("CLOUDINARY UPLOAD RESULT:", uploadResult)
+    // console.log("CLOUDINARY Name:", CLOUDINARY_NAME)
+    // console.log("CLOUDINARY API Key:", CLOUDINARY_API_KEY)
 
-// } catch (error) {
-//     fs.unlinkSync(filePath)
-//     console.log("CLOUDINARY UPLOAD ERROR:", error)   
-// }
-// }
+} catch (error) {
+    fs.unlinkSync(filePath)
+    console.log(error)   
+}
+}
 
-// export default uploadOnCloudinary
+export default uploadOnCloudinary
 
 
 
@@ -39,52 +39,52 @@
 // for vercel
 
 
-import { v2 as cloudinary } from "cloudinary";
+// import { v2 as cloudinary } from "cloudinary";
 
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-});
+// cloudinary.config({
+//     cloud_name: process.env.CLOUDINARY_NAME,
+//     api_key: process.env.CLOUDINARY_API_KEY,
+//     api_secret: process.env.CLOUDINARY_API_SECRET
+// });
 
-const uploadOnCloudinary = (fileBuffer) => {
-    return new Promise((resolve, reject) => {
+// const uploadOnCloudinary = (fileBuffer) => {
+//     return new Promise((resolve, reject) => {
 
-        if (!fileBuffer) {
-            return resolve(null);
-        }
+//         if (!fileBuffer) {
+//             return resolve(null);
+//         }
 
-        const stream = cloudinary.uploader.upload_stream(
-            {
-                resource_type: "image"
-            },
-            (error, result) => {
+//         const stream = cloudinary.uploader.upload_stream(
+//             {
+//                 resource_type: "image"
+//             },
+//             (error, result) => {
 
-                if (error) {
-                    // console.log("CLOUDINARY ERROR:", error);
+//                 if (error) {
+//                     // console.log("CLOUDINARY ERROR:", error);
 
-                    // for vercel
+//                     // for vercel
 
-                    console.error("CLOUDINARY UPLOAD ERROR:");
-    console.error("Error:", error);
-    console.error("Message:", error.message);
-    console.error("HTTP Code:", error.http_code);
+//                     console.error("CLOUDINARY UPLOAD ERROR:");
+//     console.error("Error:", error);
+//     console.error("Message:", error.message);
+//     console.error("HTTP Code:", error.http_code);
 
 
-                    return reject(error);
-                }
+//                     return reject(error);
+//                 }
 
-                console.log("CLOUDINARY SUCCESS:");
-                console.log(result.secure_url);
+//                 console.log("CLOUDINARY SUCCESS:");
+//                 console.log(result.secure_url);
 
-                resolve(result.secure_url);
+//                 resolve(result.secure_url);
 
                 
-            }
-        );
+//             }
+//         );
 
-        stream.end(fileBuffer);
-    });
-};
+//         stream.end(fileBuffer);
+//     });
+// };
 
-export default uploadOnCloudinary;
+// export default uploadOnCloudinary;

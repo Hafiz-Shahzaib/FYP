@@ -1,29 +1,29 @@
-// import multer from "multer"
+import multer from "multer"
 
-// let storage = multer.diskStorage({
-//     destination:(req,file,cb)=>{
-//         cb(null ,"./public")
-//     },
-//     filename:(req,file,cb)=>{
-//         cb(null , file.originalname)
-//     }
+let storage = multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null ,"./public")
+    },
+    filename:(req,file,cb)=>{
+        cb(null , file.originalname)
+    }
 
-// })
-// const upload = multer({storage})
+})
+const upload = multer({storage})
 
-// export default upload
+export default upload
 
 
 
 // for vercel
 
 
-import multer from "multer";
+// import multer from "multer";
 
-const storage = multer.memoryStorage();
+// const storage = multer.memoryStorage();
 
-const upload = multer({
-    storage: storage
-});
+// const upload = multer({
+//     storage: storage
+// });
 
-export default upload;
+// export default upload;

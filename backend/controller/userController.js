@@ -20,11 +20,11 @@ export const updateProfile = async (req,res) => {
         const {description, name} = req.body
         let photoUrl
         if(req.file){
-            // photoUrl = await uploadOnCloudinary(req.file.path)
+            photoUrl = await uploadOnCloudinary(req.file.path)
 
             // for vercel
 
-            photoUrl = await uploadOnCloudinary(req.file.buffer)
+            // photoUrl = await uploadOnCloudinary(req.file.buffer)
         }
         const user = await User.findByIdAndUpdate(userId, {name, description, photoUrl}) 
 
@@ -35,15 +35,6 @@ export const updateProfile = async (req,res) => {
         return  res.status(200).json(user);
     } catch (error) {
         
-    console.error("UPDATE PROFILE ERROR:", error);
-    console.error("ERROR MESSAGE:", error.message);
-    console.error("ERROR STACK:", error.stack);
-
-    return res.status(500).json({
-        message: "Profile update failed",
-        error: error.message || error
-    });
-
-        // return res.status(500).json({message: `updateProfile error ${error}`});
+        return res.status(500).json({message: `updateProfile error ${error}`});
     }
 }
