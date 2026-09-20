@@ -8,9 +8,18 @@ function CardPage() {
     const {courseData} = useSelector(state=>state.course)
     const [popularCourses, setPopularCourses] = useState([])
 
-    useEffect(()=>{
-        setPopularCourses(courseData?.slice(0,6));
-    },[courseData])
+    // useEffect(()=>{
+    //     setPopularCourses(courseData?.slice(0,6));
+    // },[courseData])
+
+
+    // now
+
+    useEffect(() => { // First, filter out disabled courses 
+    const activeCourses = (courseData || []).filter( course => course.isActive !== false ); 
+    // Then select the first 6 active courses 
+    setPopularCourses(activeCourses.slice(0, 6)); }, [courseData]);
+
   return (
     <div className='relative flex items-center justify-center flex-col'>
         <h1 className='md:text-[45px] text-[30px] font-semibold text-center mt-[30px] px-[20px]'>Our Popular Courses</h1>

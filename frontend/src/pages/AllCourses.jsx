@@ -29,13 +29,31 @@ function AllCourses() {
     setFilterCourses(courseCopy)
   }
 
-  useEffect(()=>{
-    setFilterCourses(courseData)
-  },[courseData])
+  // useEffect(()=>{
+  //   setFilterCourses(courseData)
+  // },[courseData])
 
-  useEffect(()=>{
-    applyFilter()
-  },[semester])
+  // useEffect(()=>{
+  //   applyFilter()
+  // },[semester])
+
+
+  // Filter active courses and selected semesters
+useEffect(() => {
+  let courseCopy = (courseData || []).filter(
+    course => course.isActive !== false
+  );
+
+  // Apply semester filter
+  if (semester.length > 0) {
+    courseCopy = courseCopy.filter(course =>
+      semester.includes(course.semester)
+    );
+  }
+
+  setFilterCourses(courseCopy);
+
+}, [courseData, semester]);
 
 
   return (

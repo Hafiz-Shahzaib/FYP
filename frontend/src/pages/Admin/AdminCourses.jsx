@@ -30,33 +30,65 @@ function AdminCourses() {
 
 
 
-  const handleDisable = async (id) => {
+  // const handleDisable = async (id) => {
 
+  //   await axios.delete(
+  //     serverUrl +
+  //     `/api/admin/disable-course/${id}`
+  //   );
+
+  //   toast.success("Course Disabled");
+
+  //   fetchCourses();
+
+  // };
+
+  const handleDisable = async (id) => {
+  try {
     await axios.delete(
-      serverUrl +
-      "/api/admin/disable-course/" + id
+      `${serverUrl}/api/admin/disable-course/${id}`
     );
 
     toast.success("Course Disabled");
-
     fetchCourses();
+  } catch (error) {
+    toast.error(
+      error.response?.data?.message ||
+      "Failed to disable course"
+    );
+  }
+};
 
-  };
 
 
+  // const handleEnable = async (id) => {
+
+  //   await axios.put(
+  //     serverUrl +
+  //     "/api/admin/enable-course/" + id
+  //   );
+
+  //   toast.success("Course Enabled");
+
+  //   fetchCourses();
+
+  // };
 
   const handleEnable = async (id) => {
-
+  try {
     await axios.put(
-      serverUrl +
-      "/api/admin/enable-course/" + id
+      `${serverUrl}/api/admin/enable-course/${id}`
     );
 
-    toast.success("Course Enabled");
-
+    toast.success("Course Enable");
     fetchCourses();
-
-  };
+  } catch (error) {
+    toast.error(
+      error.response?.data?.message ||
+      "Failed to enable course"
+    );
+  }
+};
 
 
 

@@ -76,7 +76,7 @@ async (req,res) => {
 
 export const getPublishedCourses = async (req,res) => {
     try {
-        const courses = await Course.find({isPublished:true})
+        const courses = await Course.find({isPublished:true, isActive: true,})
         // .populate("lectures reviews")
 
         // Now
@@ -843,56 +843,115 @@ export const updateCourse = async (req, res) => {
 
 // DISABLE COURSE
 
+// export const disableCourse = async (req, res) => {
+
+//   try {
+
+//     await Course.findByIdAndUpdate(
+//       req.params.id,
+//       { isActive: false }
+//     );
+
+//     res.json({
+//       message: "Course Disabled"
+//     });
+
+//   } catch (error) {
+
+//     res.status(500).json({
+//       message: error.message
+//     });
+
+//   }
+
+// };
+
+
+
+// // ENABLE COURSE
+
+// export const enableCourse = async (req, res) => {
+
+//   try {
+
+//     await Course.findByIdAndUpdate(
+//       req.params.id,
+//       { isActive: true }
+//     );
+
+//     res.json({
+//       message: "Course Enabled"
+//     });
+
+//   } catch (error) {
+
+//     res.status(500).json({
+//       message: error.message
+//     });
+
+//   }
+
+// };
+
+
+// --- now ----
+// Disable Course
 export const disableCourse = async (req, res) => {
-
   try {
+    const { id } = req.params;
 
-    await Course.findByIdAndUpdate(
-      req.params.id,
-      { isActive: false }
+    const course = await Course.findByIdAndUpdate(
+      id,
+      { isActive: false },
+      { new: true }
     );
 
-    res.json({
-      message: "Course Disabled"
-    });
+    if (!course) {
+      return res.status(404).json({
+        message: "Course not found",
+      });
+    }
 
+    return res.status(200).json({
+      message: "Course disabled successfully",
+      course,
+    });
   } catch (error) {
-
-    res.status(500).json({
-      message: error.message
+    return res.status(500).json({
+      message: "Failed to disable course",
+      error: error.message,
     });
-
   }
-
 };
 
-
-
-// ENABLE COURSE
-
+// Enable Course
 export const enableCourse = async (req, res) => {
-
   try {
+    const { id } = req.params;
 
-    await Course.findByIdAndUpdate(
-      req.params.id,
-      { isActive: true }
+    const course = await Course.findByIdAndUpdate(
+      id,
+      { isActive: true },
+      { new: true }
     );
 
-    res.json({
-      message: "Course Enabled"
-    });
+    if (!course) {
+      return res.status(404).json({
+        message: "Course not found",
+      });
+    }
 
+    return res.status(200).json({
+      message: "Course enabled successfully",
+      course,
+    });
   } catch (error) {
-
-    res.status(500).json({
-      message: error.message
+    return res.status(500).json({
+      message: "Failed to enable course",
+      error: error.message,
     });
-
   }
-
 };
-
 
 
 
