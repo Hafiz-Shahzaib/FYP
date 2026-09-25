@@ -1,5 +1,5 @@
 import express from "express"
-import { createAssignment, createCourse, createLecture, editAssignment, editCourse, editLecture, getCourseAssignment, getCourseById, getCourseLecture, getCreatorById, getCreatorCourses, getPublishedCourses, getSingleSubmission, getStudentSubmission, getSubmissionByAssignment, gradeSubmission, removeAssignment, removeCourse, removeLecture, submitAssignment } from "../controller/courseController.js"
+import { createAssignment, createCourse, createLecture, editAssignment, editCourse, editLecture, getCourseAssignment, getCourseById, getCourseLecture, getCreatorById, getCreatorCourses, getPublishedCourses, getSingleSubmission, getStudentSubmission, getSubmissionByAssignment, gradeSubmission, removeAssignment, removeCourse, removeLecture, removeSubmission, submitAssignment } from "../controller/courseController.js"
 import isAuth from '../middleware/isAuth.js';
 import upload from '../middleware/multer.js';
 import { searchWithAi } from "../controller/searchController.js";
@@ -31,30 +31,77 @@ courseRouter.post("/creator", isAuth, getCreatorById)
 
 //for Assignments
 
-courseRouter.post("/createassignment/:courseId", isAuth, createAssignment)
-courseRouter.get("/courseassignment/:courseId", isAuth, getCourseAssignment)
-
-// ChatGpt
-courseRouter.post("/editassignment/:assignmentId", isAuth, upload.fields([{ name: "videoUrl", maxCount: 1 },{ name: "lectureImage", maxCount: 1 }]), editAssignment)
-
-
-courseRouter.delete("/removeassignment/:assignmentId", isAuth, removeAssignment)
-
-
-// for Submission
+// ================= ASSIGNMENTS =================
 
 courseRouter.post(
-"/submitassignment/:courseId/:assignmentId", isAuth,submitAssignment);
+  "/createassignment/:courseId",
+  isAuth,
+  upload.single("assignmentFile"),
+  createAssignment
+);
 
-courseRouter.get("/viewsubmission/:assignmentId",isAuth, getSubmissionByAssignment);
-courseRouter.delete("/removesubmission/:submissionId", isAuth, removeAssignment)
-// courseRouter.get("/viewsubmission/:courseId",isAuth, getSubmissionByAssignment);
+courseRouter.get(
+  "/courseassignment/:courseId",
+  isAuth,
+  getCourseAssignment
+);
+
+courseRouter.post(
+  "/editassignment/:assignmentId",
+  isAuth,
+  upload.single("assignmentFile"),
+  editAssignment
+);
+
+courseRouter.delete(
+  "/removeassignment/:assignmentId",
+  isAuth,
+  removeAssignment
+);
 
 
-// for Grade
-courseRouter.post("/gradesubmission/:submissionId",isAuth, gradeSubmission);
-courseRouter.get("/getsubmission/:submissionId",isAuth, getSingleSubmission);
-courseRouter.get("/studentsubmission/:assignmentId",isAuth, getStudentSubmission);
+// ================= SUBMISSIONS =================
+
+courseRouter.post(
+  "/submitassignment/:courseId/:assignmentId",
+  isAuth,
+  upload.single("submissionFile"),
+  submitAssignment
+);
+
+courseRouter.get(
+  "/viewsubmission/:assignmentId",
+  isAuth,
+  getSubmissionByAssignment
+);
+
+courseRouter.delete(
+  "/removesubmission/:submissionId",
+  isAuth,
+  removeSubmission
+//   removeSubmission
+);
+
+
+// ================= GRADING =================
+
+courseRouter.post(
+  "/gradesubmission/:submissionId",
+  isAuth,
+  gradeSubmission
+);
+
+courseRouter.get(
+  "/getsubmission/:submissionId",
+  isAuth,
+  getSingleSubmission
+);
+
+courseRouter.get(
+  "/studentsubmission/:assignmentId",
+  isAuth,
+  getStudentSubmission
+);
 
 
 

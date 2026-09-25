@@ -11,16 +11,7 @@ const courseSchema = new mongoose.Schema({
     description:{
         type:String
     },
-    // category:{
-    //     type:String,
-    //     required:true
-    // },
-    // level:{
-    //     type:String,
-    //     enum:["Beginner", "Intermediate", "Advanced"]
-    // },
-    // new feild for semester
-    // 🔁 category → semester
+    
     semester:{
         // type:Number,
         type:String,

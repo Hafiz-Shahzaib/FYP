@@ -1,6 +1,5 @@
 import express from 'express'
 import { enrollCourse } from '../controller/enrollController.js'
-// import { isAuthenticated } from '../middleware/auth.js'
 import isAuth from '../middleware/isAuth.js';
 
 const enrollRouter = express.Router()

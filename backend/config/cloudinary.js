@@ -1,90 +1,58 @@
-import { v2 as cloudinary } from 'cloudinary'
+import { v2 as cloudinary } from "cloudinary";
+import fs from "fs";
+import "dotenv/config";
 
-import fs from "fs"
-
-
-const uploadOnCloudinary = async (filePath) => {
-    cloudinary.config({ 
-  cloud_name: process.env.CLOUDINARY_NAME, 
-  api_key: process.env.CLOUDINARY_API_KEY, 
-  api_secret: process.env.CLOUDINARY_API_SECRET
+// Configure Cloudinary once
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-try {
-    if(!filePath){
-        return null
+// Existing helper (used by course/lecture uploads)
+const uploadOnCloudinary = async (filePath) => {
+  if (!filePath) return null;
+
+  try {
+    const result = await cloudinary.uploader.upload(filePath, {
+      resource_type: "auto",
+    });
+
+    return result.secure_url;
+  } catch (error) {
+    console.error("Cloudinary upload error:", error.message);
+    throw error;
+  } finally {
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
     }
-    const uploadResult = await cloudinary.uploader.upload(filePath,{resource_type:'auto'})
-    fs.unlinkSync(filePath)
-    return uploadResult.secure_url
+  }
+};
 
-    // console.log("CLOUDINARY UPLOAD RESULT:", uploadResult)
-    // console.log("CLOUDINARY Name:", CLOUDINARY_NAME)
-    // console.log("CLOUDINARY API Key:", CLOUDINARY_API_KEY)
-
-} catch (error) {
-    fs.unlinkSync(filePath)
-    console.log(error)   
-}
-}
-
-export default uploadOnCloudinary
+export default uploadOnCloudinary;
 
 
+// Assignment and submission upload helper
+export const uploadFileWithDetails = async (filePath) => {
+  if (!filePath) return null;
 
+  try {
+    const result = await cloudinary.uploader.upload(filePath, {
+      resource_type: "auto",
+    });
 
-
-
-
-// for vercel
-
-
-// import { v2 as cloudinary } from "cloudinary";
-
-// cloudinary.config({
-//     cloud_name: process.env.CLOUDINARY_NAME,
-//     api_key: process.env.CLOUDINARY_API_KEY,
-//     api_secret: process.env.CLOUDINARY_API_SECRET
-// });
-
-// const uploadOnCloudinary = (fileBuffer) => {
-//     return new Promise((resolve, reject) => {
-
-//         if (!fileBuffer) {
-//             return resolve(null);
-//         }
-
-//         const stream = cloudinary.uploader.upload_stream(
-//             {
-//                 resource_type: "image"
-//             },
-//             (error, result) => {
-
-//                 if (error) {
-//                     // console.log("CLOUDINARY ERROR:", error);
-
-//                     // for vercel
-
-//                     console.error("CLOUDINARY UPLOAD ERROR:");
-//     console.error("Error:", error);
-//     console.error("Message:", error.message);
-//     console.error("HTTP Code:", error.http_code);
-
-
-//                     return reject(error);
-//                 }
-
-//                 console.log("CLOUDINARY SUCCESS:");
-//                 console.log(result.secure_url);
-
-//                 resolve(result.secure_url);
-
-                
-//             }
-//         );
-
-//         stream.end(fileBuffer);
-//     });
-// };
-
-// export default uploadOnCloudinary;
+    return {
+      url: result.secure_url,
+      publicId: result.public_id,
+      format: result.format || "",
+      size: result.bytes || 0,
+    };
+  } catch (error) {
+    console.error("Cloudinary file upload error:", error.message);
+    throw error;
+  } finally {
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+  }
+};

@@ -1,3 +1,4 @@
+
 import axios from 'axios'
 import React, {useEffect ,useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -298,6 +299,63 @@ Your Result
   }}
 />
 )}
+
+
+      {/* now */}
+
+      {/* Assignment File Preview */}
+{selectedAssignment?.assignmentFile?.url && (
+  <div className="mt-6 rounded-xl border border-gray-200 bg-gray-50 p-4">
+
+    <h3 className="mb-3 text-lg font-semibold text-gray-800">
+      Assignment Attachment
+    </h3>
+
+    {/* File Name */}
+    <p className="mb-3 break-all text-sm text-gray-600">
+      {selectedAssignment.assignmentFile.originalName ||
+        "Assignment File"}
+    </p>
+
+    {/* PDF Preview */}
+    {selectedAssignment.assignmentFile.mimeType === "application/pdf" && (
+      <div className="mb-4">
+        <iframe
+          src={selectedAssignment.assignmentFile.url}
+          title="Assignment PDF"
+          className="h-[500px] w-full rounded-lg border border-gray-300"
+        />
+      </div>
+    )}
+
+    {/* Image Preview */}
+    {selectedAssignment.assignmentFile.mimeType?.startsWith("image/") && (
+      <div className="mb-4">
+        <img
+          src={selectedAssignment.assignmentFile.url}
+          alt="Assignment Attachment"
+          onClick={() =>
+            setZoomImage(selectedAssignment.assignmentFile.url)
+          }
+          className="mx-auto max-h-[500px] cursor-zoom-in rounded-lg object-contain"
+        />
+      </div>
+    )}
+
+    {/* Open / Download File */}
+    <a
+      href={selectedAssignment.assignmentFile.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-700"
+    >
+      Open / Download Assignment
+    </a>
+
+  </div>
+)}
+
+      {/* end */}
 
         </div>
   

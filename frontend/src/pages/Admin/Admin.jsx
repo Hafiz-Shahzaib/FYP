@@ -1,37 +1,3 @@
-// import React from 'react'
-// import { Outlet } from 'react-router-dom'
-// import Nav from '../../component/Nav'
-// import Footer from '../../component/Footer'
-// import Sidebaradmin from './Sidebaradmin'
-
-// function Admin() {
-//   return (
-//     <div className='text-default min-h-screen bg-white'>
-//       {/* <StNavbar /> */}
-//       <Nav />
-//       <br />
-//       <br />
-//       <div className='flex'>
-//         <Sidebaradmin />
-//         <div className='flex-1'>
-//               {<Outlet />}
-//         </div>
-//       </div>
-//       <Footer />
-//     </div>
-//   )
-// }
-
-// export default Admin
-
-
-
-
-
-
-
-
-
 import React ,{ useEffect, useState  } from 'react'
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { Outlet, useNavigate, NavLink } from 'react-router-dom';

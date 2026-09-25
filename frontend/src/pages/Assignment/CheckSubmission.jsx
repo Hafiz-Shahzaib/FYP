@@ -101,6 +101,78 @@ function CheckSubmission() {
             __html: submission.submissionContent
         }}/>
 
+        {/* now */}
+
+        {/* Student Uploaded Assignment File */}
+<div className="mt-8 border-t border-gray-200 pt-6">
+  <h2 className="text-xl font-bold text-gray-800 mb-4">
+    Student Uploaded Assignment
+  </h2>
+
+  {submission.submissionFile?.url ? (
+    <div className="space-y-4">
+
+      {/* File Name */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-gray-50 border border-gray-200 rounded-lg p-4">
+
+        <div className="min-w-0">
+          <p className="font-medium text-gray-800 break-words">
+            {submission.submissionFile.originalName || "Assignment.pdf"}
+          </p>
+
+          <p className="text-sm text-gray-500 mt-1">
+            PDF Assignment
+          </p>
+        </div>
+
+        {/* Open and Download Buttons */}
+        <div className="flex flex-wrap gap-2">
+
+          <a
+            href={submission.submissionFile.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-black text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700 transition"
+          >
+            Open PDF
+          </a>
+
+          <a
+            href={submission.submissionFile.url}
+            download={submission.submissionFile.originalName || "Assignment.pdf"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition"
+          >
+            Download PDF
+          </a>
+
+        </div>
+      </div>
+
+      {/* PDF Preview */}
+      <div className="w-full h-[500px] md:h-[700px] border border-gray-300 rounded-lg overflow-hidden">
+
+        <iframe
+          src={submission.submissionFile.url}
+          title="Student Assignment PDF"
+          className="w-full h-full"
+        />
+
+      </div>
+
+    </div>
+  ) : (
+    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+      <p className="text-yellow-800 text-sm">
+        No uploaded assignment file was found for this submission.
+      </p>
+    </div>
+  )}
+</div>
+
+        {/* end */}
+
         </div>
 
         {/* right or bottom */}

@@ -63,7 +63,7 @@ function CreateAssignment() {
 
             {/* Button */}
             <div className='flex gap-4 mb-6'>
-                <button className='flex items-center gap-2 px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 text-sm font-semibold' onClick={()=>navigate(`/editcourse/${courseId}`)}> <FaArrowLeftLong />Back to Course</button>
+                <button className='flex items-center gap-2 px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 text-sm font-semibold' onClick={()=>navigate(-1)}> <FaArrowLeftLong />Back to Course</button>
                 <button className='px-5 py-2 rounded-md bg-[black] text-white hover:bg-gray-600 transition-all text-sm font-semibold shadow' disabled={loading} onClick={handleCreateAssignment}>{loading ? <ClipLoader size={30} color='white'/>: "+ Create Assignment"}</button>
             </div>
             {/* assignment list */}

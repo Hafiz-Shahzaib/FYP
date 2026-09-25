@@ -17,32 +17,6 @@ router.put("/enable-user/:id", enableUser);
 
 
 
-// for courae & Lecture
-// import express from "express";
-
-// import {
-
-//   getAllCourses,
-//   addCourse,
-//   updateCourse,
-//   disableCourse,
-//   enableCourse
-
-// } from "../controller/courseAdminController.js";
-
-
-// import {
-
-//   addLecture,
-//   updateLecture,
-//   disableLecture,
-//   enableLecture
-
-// } from "../controller/lectureAdminController.js";
-
-// const router = express.Router();
-
-
 // COURSE ROUTES
 
 router.get("/courses", getAllCourses);

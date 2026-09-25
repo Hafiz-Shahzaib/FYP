@@ -1,16 +1,6 @@
-// import User from "../models/userModel.js";
 import User from "../model/userModel.js";
 import bcrypt from "bcryptjs";
 
-// GET ALL USERS
-// export const getAllUsers = async (req, res) => {
-//   try {
-//     const users = await User.find().select("-password");
-//     res.json(users);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
 
 // New feild add
 export const getAllUsers = async (req, res) => {
@@ -33,37 +23,7 @@ export const getAllUsers = async (req, res) => {
 };
 
 // ADD USER (Admin)
-// 
 
-
-
-// export const addUserByAdmin = async (req, res) => {
-//   try {
-//     const { name, email, password, role } = req.body;
-
-//     // Check if user exists
-//     const existingUser = await User.findOne({ email });
-//     if (existingUser) {
-//       return res.status(400).json({ message: "User already exists" });
-//     }
-
-//     // Hash password
-//     const hashedPassword = await bcrypt.hash(password, 10);
-
-//     // Create new user
-//     const newUser = await User.create({
-//       name,
-//       email,
-//       password: hashedPassword,
-//       role,
-//     });
-
-//     res.status(201).json(newUser);
-//   } catch (error) {
-//     console.log(error); // <--- important to see exact error in backend console
-//     res.status(500).json({ message: error.message });
-//   }
-// };
 
 // add new feild
 export const addUserByAdmin = async (req, res) => {
@@ -198,18 +158,3 @@ export const enableUser = async (req, res) => {
   }
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// for course
